@@ -10,6 +10,11 @@ export type Ball = {
     direction: number,
     radius: number,
     backgroundColor: string,
+    normalx: number,
+    normaly: number,
+    tangentx: number,
+    tangenty: number,
+    dotProductTangent: number,
     index: number
 
 }

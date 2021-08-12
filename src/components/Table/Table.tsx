@@ -48,14 +48,21 @@ const Table = (props: any) => {
                 transform: 'translate(-50%, -50%)' 
             }}>
                 {balls.map((ball) => (
+                        <>
                         <Ball key={ball.index} index={ball.index} x={ball.x} y={ball.y} radius={props.radius} backgroundColor={ball.backgroundColor}/>
+                        <Line width={props.width} height={props.height} lineBeginX={ball.x + ball.radius} lineBeginY={ball.y + ball.radius} lineEndX={ball.x + ball.radius + ball.normalx * 20} lineEndY={ball.y + ball.radius + ball.normaly * 20} color={'green'}/>
+                        <Line width={props.width} height={props.height} lineBeginX={ball.x + ball.radius} lineBeginY={ball.y + ball.radius} lineEndX={ball.x + ball.radius + ball.tangentx * ball.dotProductTangent * 10} lineEndY={ball.y + ball.radius + ball.tangenty * ball.dotProductTangent * 10} color={'orange'}/> 
+                        {/* <Line width={props.width} height={props.height} lineBeginX={ball.x + ball.radius} lineBeginY={ball.y + ball.radius} lineEndX={ball.x + ball.radius + ball.tangentx * 20} lineEndY={ball.y + ball.radius + ball.tangenty * 20} color={'red'}/> */}
+                        {/* <Line width={props.width} height={props.height} lineBeginX={ball.x + ball.radius} lineBeginY={ball.y + ball.radius} lineEndX={ball.x + ball.radius + ball.dotProductTangent * 20} lineEndY={ball.y + ball.radius + ball.dotProductTangent * 10} color={'orange'}/> */}
+                        </>
                 ))}
             </div>
             <h3 className="Counter">Steps {count}</h3>
             <button className="Button" onClick={() => setPlaying(!isPlaying)}>
                 {isPlaying ? 'pause' : 'play'}
             </button>
-            <Line width={props.width} height={props.height} lineBeginX={balls[0].x + balls[0].radius} lineBeginY={balls[0].y + balls[0].radius} lineEndX={balls[1].x + balls[1].radius} lineEndY={balls[1].y + balls[1].radius} color={'yellow'}/>
+            {/* <Line width={props.width} height={props.height} lineBeginX={balls[0].x + balls[0].radius} lineBeginY={balls[0].y + balls[0].radius} lineEndX={balls[1].x + balls[1].radius} lineEndY={balls[1].y + balls[1].radius} color={'yellow'}/> */}
+            
             </div>
             )
                 

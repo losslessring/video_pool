@@ -16,6 +16,11 @@ export const checkBoundaries = (width: number): Function => (height: number): Fu
         direction:      0,
         radius:         ball.radius,
         backgroundColor:((ball.x > width - diameter )  || (ball.x < 0) || (ball.y > height - diameter ) || (ball.y < 0)) ? 'red' : ball.backgroundColor,
+        normalx:        ball.normalx,
+        normaly:        ball.normaly,
+        tangentx:       ball.tangentx,
+        tangenty:       ball.tangenty,
+        dotProductTangent: ball.dotProductTangent,
         index:          ball.index
     }
 }

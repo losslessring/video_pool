@@ -14,12 +14,17 @@ export function generateBalls(amount :number, radius: number, ballsLayout = ball
                                         y:              ballPosition.y,
                                         centerx:        ballPosition.x + radius,
                                         centery:        ballPosition.y + radius,
-                                        xspeed:         10,
-                                        yspeed:         5,
+                                        xspeed:         i ? i * - 6 : 10,
+                                        yspeed:         i ? i * - 6 : 10,
                                         velocity:       0,
                                         direction:      0,
                                         radius:         radius,
                                         backgroundColor:'yellow',
+                                        normalx:        0,
+                                        normaly:        0,
+                                        tangentx:       0,
+                                        tangenty:       0,
+                                        dotProductTangent: 0,
                                         index:          i
                                 }
                     } else return {
@@ -33,6 +38,11 @@ export function generateBalls(amount :number, radius: number, ballsLayout = ball
                         direction:      0,
                         radius:         radius,
                         backgroundColor:'yellow',
+                        normalx:        0,
+                        normaly:        0,
+                        tangentx:       0,
+                        tangenty:       0,
+                        dotProductTangent: 0,
                         index:          i
                     }
              })
