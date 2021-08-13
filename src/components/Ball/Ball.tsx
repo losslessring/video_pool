@@ -15,6 +15,7 @@ const Ball = (props : any) => {
                 // left: '50%',               
                 transform: `translate(${props.x}px, ${props.y}px)` ,
                 borderRadius: '50%',
+                zIndex: 3,
 
     }))
 
@@ -27,9 +28,14 @@ const Ball = (props : any) => {
                 }
         })
       })
+
+
     return (
         
-            <div style={styleObj}>{props.index}
+            <div 
+              style={styleObj} 
+              // onMouseDown={ () => console.log("mouse down") }
+            >{props.index}
             </div>
             )
                 

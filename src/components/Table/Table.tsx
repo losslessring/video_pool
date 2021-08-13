@@ -4,6 +4,7 @@ import Line from "../Line/Line"
 import { generateBalls } from '../../engine/utils/generateBalls'
 import { useInterval } from '../../hooks/useInterval'
 import { nextBallsPosition } from '../../engine/utils/nextBallsPosition'
+import { viewportToLocalCoords } from '../../engine/utils/viewport/viewportToLocalCoords'
 
 const Table = (props: any) => {
     
@@ -35,18 +36,29 @@ const Table = (props: any) => {
         isPlaying ? delay : null,
 )    
     return (
-            <div>
+            <>
             <div style={{
                 position: 'fixed',
+                // display: 'block',
                 width: `${props.width}px`,
                 height: `${props.height}px`,
-                border: '5px solid lightGrey',
+                // border: '5px solid lightGrey',
                 color: '#ffffff',
                 backgroundColor: '#063c06',               
+                // top: '0',
+                // bottom: '0',
+                // left: '0',
+                // right: '0',
+                // margin: 'auto',
                 top: '50%',
                 left: '50%',
-                transform: 'translate(-50%, -50%)' 
-            }}>
+                transform: 'translate(-50%, -50%)',
+                zIndex: 2, 
+            }}
+            // onMouseDown={ (e) => console.log(e) }
+            // onMouseUp={ (e) => console.log("mouse up")}
+            onMouseDown={ (e) =>  console.log(viewportToLocalCoords(e))}
+            >
                 {balls.map((ball) => (
                         <>
                         <Ball key={ball.index} index={ball.index} x={ball.x} y={ball.y} radius={props.radius} backgroundColor={ball.backgroundColor}/>
@@ -63,7 +75,7 @@ const Table = (props: any) => {
             </button>
             {/* <Line width={props.width} height={props.height} lineBeginX={balls[0].x + balls[0].radius} lineBeginY={balls[0].y + balls[0].radius} lineEndX={balls[1].x + balls[1].radius} lineEndY={balls[1].y + balls[1].radius} color={'yellow'}/> */}
             
-            </div>
+            </>
             )
                 
             

@@ -24,3 +24,8 @@ export type BallPosition = {
     y: number,
     index: number
 }
+
+export type LocalCoords = {
+    localX: number,
+    localY: number
+}
