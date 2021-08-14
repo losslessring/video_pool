@@ -5,6 +5,7 @@ import { generateBalls } from '../../engine/utils/generateBalls'
 import { useInterval } from '../../hooks/useInterval'
 import { nextBallsPosition } from '../../engine/utils/nextBallsPosition'
 import { viewportToLocalCoords } from '../../engine/utils/viewport/viewportToLocalCoords'
+import { findBallOnPosition } from '../../engine/utils/viewport/findBallOnPosition'
 
 const Table = (props: any) => {
     
@@ -21,10 +22,11 @@ const Table = (props: any) => {
     const [balls, setBallsPosition] = useState(() => {
         return generateBalls(2, props.radius)
     })
-    
+    const [clickPosition, setClickPosition]: any = useState(() => {})  
     const [count, setCount] = useState(() => 0)  
     const [delay, setDelay] = useState(() => 100)
     const [isPlaying, setPlaying] = useState(() => true)
+
     useInterval(
         () => {
                 // Your custom logic here
@@ -56,8 +58,26 @@ const Table = (props: any) => {
                 zIndex: 2, 
             }}
             // onMouseDown={ (e) => console.log(e) }
-            // onMouseUp={ (e) => console.log("mouse up")}
-            onMouseDown={ (e) =>  console.log(viewportToLocalCoords(e))}
+            onMouseDown={ (e) => {
+                setClickPosition((prevClickedBall: any) => {
+                    // console.log(viewportToLocalCoords(e))
+                    return viewportToLocalCoords(e)
+                })
+            }}
+
+            onMouseUp={ (e) =>  {
+                // setBallsPosition(prevBallsPosition => {
+                    //clickPosition
+                    
+                    const {localX: firstClickX, localY: firstClickY} = clickPosition
+                    findBallOnPosition(firstClickX, firstClickY, balls)
+                    //const {localX, localY} = viewportToLocalCoords(e)
+                    
+                //     return findBallUnderCursor(localX, localY, balls)
+                // })
+                }
+            }
+            // onMouseUp={(e) =>}
             >
                 {balls.map((ball) => (
                         <>
