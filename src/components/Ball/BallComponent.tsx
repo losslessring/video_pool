@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from "react"
 
-const Ball = (props : any) => {
+const BallComponent = (props : any) => {
     
     const [styleObj, setStyle] = useState(() => ({
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                position: 'absolute' as 'absolute',
-                height: `${props.radius * 2}px`,
-                width: `${props.radius * 2}px`,
-                color: 'black',
-                backgroundColor: `${props.backgroundColor}`,
-                // top: '50%',
-                // left: '50%',               
+                
+                backgroundColor: `${props.backgroundColor}`,             
                 transform: `translate(${props.x}px, ${props.y}px)` ,
-                borderRadius: '50%',
-                zIndex: 3,
 
     }))
 
@@ -33,7 +23,17 @@ const Ball = (props : any) => {
     return (
         
             <div 
-              style={styleObj} 
+              style={{...styleObj,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                position: 'absolute' as 'absolute',
+                color: 'black',
+                borderRadius: '50%',
+                zIndex: 3,
+                height: `${props.radius * 2}px`,
+                width: `${props.radius * 2}px`, 
+                userSelect: 'none'}} 
               // onMouseDown={ () => console.log("mouse down") }
             >{props.index}
             </div>
@@ -42,4 +42,4 @@ const Ball = (props : any) => {
             
 }
 
-export default Ball
+export default BallComponent

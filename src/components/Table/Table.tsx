@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react"
-import Ball from "../Ball/Ball"
+import React, { useState, useEffect, SetStateAction } from "react"
+import BallComponent from "../Ball/BallComponent"
 import Line from "../Line/Line"
 import { generateBalls } from '../../engine/utils/generateBalls'
 import { useInterval } from '../../hooks/useInterval'
 import { nextBallsPosition } from '../../engine/utils/nextBallsPosition'
+import { shotBall } from '../../engine/utils/shotBall'
 import { viewportToLocalCoords } from '../../engine/utils/viewport/viewportToLocalCoords'
-import { findBallOnPosition } from '../../engine/utils/viewport/findBallOnPosition'
+import { findBallIndexOnPosition } from '../../engine/utils/viewport/findBallOnPosition'
+
+import { Ball } from '../../engine/types/types'
 
 const Table = (props: any) => {
     
@@ -22,11 +25,15 @@ const Table = (props: any) => {
     const [balls, setBallsPosition] = useState(() => {
         return generateBalls(2, props.radius)
     })
-    const [clickPosition, setClickPosition]: any = useState(() => {})  
+    const [selectBallClickPosition, setSelectBallClickPosition]: any = useState(() => {})
+    const [shotDirectionClickPosition, setShotDirectionClickPosition]: any = useState(() => {})
+    const [selectedBallIndex, setSelectedBallIndex]: any = useState(() => undefined) 
+    const [clicksCounter, setClicksCounter] = useState(() => 0)  
     const [count, setCount] = useState(() => 0)  
     const [delay, setDelay] = useState(() => 100)
     const [isPlaying, setPlaying] = useState(() => true)
 
+    
     useInterval(
         () => {
                 // Your custom logic here
@@ -59,29 +66,36 @@ const Table = (props: any) => {
             }}
             // onMouseDown={ (e) => console.log(e) }
             onMouseDown={ (e) => {
-                setClickPosition((prevClickedBall: any) => {
-                    // console.log(viewportToLocalCoords(e))
-                    return viewportToLocalCoords(e)
-                })
+                
+                if (clicksCounter === 0) {
+                    
+                    setSelectedBallIndex((prevSelectedBall: any)  => {
+                        console.log(clicksCounter)     
+                        const {localX: firstClickX, localY: firstClickY} = viewportToLocalCoords(e)
+                        return findBallIndexOnPosition(firstClickX, firstClickY, balls)
+                    })
+                    setClicksCounter(prevClicksCount => prevClicksCount + 1)
+                
+                } else if (clicksCounter === 1) {
+                    console.log(clicksCounter) 
+                    const {localX: secondClickX, localY: secondClickY} = viewportToLocalCoords(e)
+                    
+                    setBallsPosition((prevBallsPosition: Ball[]) => {
+                        const SHOT_STRENGTH_DIVISOR = 10
+                        return shotBall(secondClickX, secondClickY, selectedBallIndex, SHOT_STRENGTH_DIVISOR, prevBallsPosition)               
+                    })
+
+                    setClicksCounter(prevClicksCount => 0)
+                    
+                } 
+
             }}
 
-            onMouseUp={ (e) =>  {
-                // setBallsPosition(prevBallsPosition => {
-                    //clickPosition
-                    
-                    const {localX: firstClickX, localY: firstClickY} = clickPosition
-                    findBallOnPosition(firstClickX, firstClickY, balls)
-                    //const {localX, localY} = viewportToLocalCoords(e)
-                    
-                //     return findBallUnderCursor(localX, localY, balls)
-                // })
-                }
-            }
-            // onMouseUp={(e) =>}
+            
             >
                 {balls.map((ball) => (
                         <>
-                        <Ball key={ball.index} index={ball.index} x={ball.x} y={ball.y} radius={props.radius} backgroundColor={ball.backgroundColor}/>
+                        <BallComponent key={ball.index} index={ball.index} x={ball.x} y={ball.y} radius={props.radius} backgroundColor={ball.backgroundColor}/>
                         <Line width={props.width} height={props.height} lineBeginX={ball.x + ball.radius} lineBeginY={ball.y + ball.radius} lineEndX={ball.x + ball.radius + ball.normalx * 20} lineEndY={ball.y + ball.radius + ball.normaly * 20} color={'green'}/>
                         <Line width={props.width} height={props.height} lineBeginX={ball.x + ball.radius} lineBeginY={ball.y + ball.radius} lineEndX={ball.x + ball.radius + ball.tangentx * ball.dotProductTangent * 10} lineEndY={ball.y + ball.radius + ball.tangenty * ball.dotProductTangent * 10} color={'orange'}/> 
                         {/* <Line width={props.width} height={props.height} lineBeginX={ball.x + ball.radius} lineBeginY={ball.y + ball.radius} lineEndX={ball.x + ball.radius + ball.tangentx * 20} lineEndY={ball.y + ball.radius + ball.tangenty * 20} color={'red'}/> */}
