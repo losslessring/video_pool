@@ -15,6 +15,9 @@ export type Ball = {
     tangentx: number,
     tangenty: number,
     dotProductTangent: number,
+    dotProductNormal: number,
+    mass: number,
+    impulse: number,
     index: number
 
 }

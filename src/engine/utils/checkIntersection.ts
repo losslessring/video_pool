@@ -41,6 +41,10 @@ export const checkIntersection = (balls: any) => (masterBall: any) => {
             //console.log(`dotProductTangentCheckBall: ${dotProductTangentCheckBall} dotProductTangentMasterBall: ${dotProductTangentMasterBall}`)
             console.log(`dotProductTangentMasterBall: ${dotProductTangentMasterBall}`)
 
+            const dotProductNormalMasterBall = masterBall.xspeed * normalX + masterBall.yspeed * normalY
+            const dotProductNormalCheckBall = checkBall.xspeed * normalX + checkBall.yspeed * normalY
+            const impulseMasterBall = (dotProductNormalMasterBall * ( masterBall.mass - checkBall.mass ) + 2 * checkBall.mass * dotProductNormalCheckBall ) / ( masterBall.mass + checkBall.mass)
+
             collidedBall = {    
                 // x: masterBall.x,
                 // y: masterBall.y,
@@ -54,8 +58,8 @@ export const checkIntersection = (balls: any) => (masterBall: any) => {
                 // yspeed: masterBall.yspeed,
                 //  xspeed: masterBall.xspeed * -1,
                 //  yspeed: masterBall.yspeed * -1,
-                xspeed: tangentX * dotProductTangentMasterBall,
-                yspeed: tangentY * dotProductTangentMasterBall,
+                xspeed: tangentX * dotProductTangentMasterBall + normalX * impulseMasterBall,
+                yspeed: tangentY * dotProductTangentMasterBall + normalY * impulseMasterBall,
                 velocity: masterBall.velocity,
                 direction: masterBall.direction,
                 radius: masterBall.radius,
@@ -66,6 +70,9 @@ export const checkIntersection = (balls: any) => (masterBall: any) => {
                 tangentx: tangentX,
                 tangenty: tangentY,
                 dotProductTangent: dotProductTangentMasterBall,
+                dotProductNormal: dotProductNormalMasterBall,
+                mass: masterBall.mass,
+                impulse: impulseMasterBall,
                 index: masterBall.index,
 
 
@@ -78,7 +85,8 @@ export const checkIntersection = (balls: any) => (masterBall: any) => {
                 normaly: 0,
                 tangentx: 0,
                 tangenty: 0,
-                dotProductTangent: 0
+                dotProductTangent: 0,
+                dotProductNormal: 0
             }
         }   
     })

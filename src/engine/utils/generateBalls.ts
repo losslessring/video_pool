@@ -27,6 +27,9 @@ export function generateBalls(amount :number, radius: number, ballsLayout = ball
                                         tangentx:       0,
                                         tangenty:       0,
                                         dotProductTangent: 0,
+                                        dotProductNormal: 0,
+                                        mass: 10,
+                                        impulse: 0,
                                         index:          i
                                 }
                     } else return {
@@ -45,6 +48,9 @@ export function generateBalls(amount :number, radius: number, ballsLayout = ball
                         tangentx:       0,
                         tangenty:       0,
                         dotProductTangent: 0,
+                        dotProductNormal: 0,
+                        mass:           10,
+                        impulse:        0,
                         index:          i
                     }
              })

@@ -30,7 +30,7 @@ const BallComponent = (props : any) => {
                 position: 'absolute' as 'absolute',
                 color: 'black',
                 borderRadius: '50%',
-                zIndex: 3,
+                zIndex: 2,
                 height: `${props.radius * 2}px`,
                 width: `${props.radius * 2}px`, 
                 userSelect: 'none'}} 

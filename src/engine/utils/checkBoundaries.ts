@@ -21,6 +21,9 @@ export const checkBoundaries = (width: number): Function => (height: number): Fu
         tangentx:       ball.tangentx,
         tangenty:       ball.tangenty,
         dotProductTangent: ball.dotProductTangent,
+        dotProductNormal: ball.dotProductNormal,
+        mass:           ball.mass,
+        impulse:        ball.impulse,
         index:          ball.index
     }
 }
