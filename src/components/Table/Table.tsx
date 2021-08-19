@@ -1,6 +1,11 @@
 import React, { useState, useEffect, SetStateAction } from "react"
 import BallComponent from "../Ball/BallComponent"
 import Line from "../Line/Line"
+
+import PocketComponent from "../Pocket/PocketComponent"
+import { generatePockets } from '../../engine/utils/generatePockets'
+import { Pocket } from '../../engine/types/types'
+
 import { generateBalls } from '../../engine/utils/generateBalls'
 import { useInterval } from '../../hooks/useInterval'
 import { nextBallsPosition } from '../../engine/utils/nextBallsPosition'
@@ -25,8 +30,10 @@ const Table = (props: any) => {
     const [balls, setBallsPosition] = useState(() => {
         return generateBalls(2, props.radius)
     })
-    const [selectBallClickPosition, setSelectBallClickPosition]: any = useState(() => {})
-    const [shotDirectionClickPosition, setShotDirectionClickPosition]: any = useState(() => {})
+    const [pockets, setPockets] = useState(() => {
+        return generatePockets({width: props.width, height: props.height})
+    })
+
     const [selectedBallIndex, setSelectedBallIndex]: any = useState(() => undefined) 
     const [clicksCounter, setClicksCounter] = useState(() => 0)  
     const [count, setCount] = useState(() => 0)  
@@ -102,6 +109,9 @@ const Table = (props: any) => {
                         {/* <Line width={props.width} height={props.height} lineBeginX={ball.x + ball.radius} lineBeginY={ball.y + ball.radius} lineEndX={ball.x + ball.radius + ball.tangentx * 20} lineEndY={ball.y + ball.radius + ball.tangenty * 20} color={'red'}/> */}
                         {/* <Line width={props.width} height={props.height} lineBeginX={ball.x + ball.radius} lineBeginY={ball.y + ball.radius} lineEndX={ball.x + ball.radius + ball.dotProductTangent * 20} lineEndY={ball.y + ball.radius + ball.dotProductTangent * 10} color={'orange'}/> */}
                         </>
+                ))}
+                {pockets.map((pocket) => ( 
+                    <PocketComponent x={pocket.x - pocket.radius} y={pocket.y - pocket.radius} radius={pocket.radius} backgroundColor={pocket.backgroundColor} index={pocket.index}/>
                 ))}
             </div>
             <h3 className="Counter">Steps {count}</h3>

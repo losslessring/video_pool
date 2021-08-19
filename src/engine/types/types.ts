@@ -32,3 +32,11 @@ export type LocalCoords = {
     localX: number,
     localY: number
 }
+
+export type Pocket = {
+    x: number,
+    y: number,
+    backgroundColor: string,
+    radius: number,
+    index: number
+}
