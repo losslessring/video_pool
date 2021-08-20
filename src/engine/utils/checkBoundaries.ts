@@ -10,8 +10,6 @@ export const checkBoundaries = (width: number): Function => (height: number): Fu
         centery:        ball.y + ball.radius,
         xspeed:         ((ball.x > width - diameter )  || (ball.x < 0)) ? ball.xspeed * -1 : ball.xspeed,
         yspeed:         ((ball.y > height - diameter ) || (ball.y < 0)) ? ball.yspeed * -1 : ball.yspeed,
-        // xspeed: xspeed,
-        // yspeed: yspeed,
         velocity:       0,
         direction:      0,
         radius:         ball.radius,
