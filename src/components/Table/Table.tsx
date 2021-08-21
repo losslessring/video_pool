@@ -45,7 +45,7 @@ const Table = (props: any) => {
         () => {
                 // Your custom logic here
                 setCount(prevCount => prevCount + 1)
-                setBallsPosition(prevBallsPosition => nextBallsPosition(prevBallsPosition, props.width, props.height, props.radius))
+                setBallsPosition(prevBallsPosition => nextBallsPosition(prevBallsPosition, pockets, props.width, props.height, props.radius))
                 
         },
         // Delay in milliseconds or null to stop it
