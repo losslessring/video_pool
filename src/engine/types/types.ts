@@ -18,6 +18,8 @@ export type Ball = {
     dotProductNormal: number,
     mass: number,
     impulse: number,
+    hitPocket: boolean,
+    hitPocketNumber: number | undefined,
     index: number
 
 }

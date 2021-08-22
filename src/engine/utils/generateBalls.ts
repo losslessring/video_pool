@@ -30,6 +30,8 @@ export function generateBalls(amount :number, radius: number, ballsLayout = ball
                                         dotProductNormal: 0,
                                         mass: 10,
                                         impulse: 0,
+                                        hitPocket: false, 
+                                        hitPocketNumber: undefined,
                                         index:          i
                                 }
                     } else return {
@@ -51,6 +53,8 @@ export function generateBalls(amount :number, radius: number, ballsLayout = ball
                         dotProductNormal: 0,
                         mass:           10,
                         impulse:        0,
+                        hitPocket:      false, 
+                        hitPocketNumber: undefined,
                         index:          i
                     }
              })

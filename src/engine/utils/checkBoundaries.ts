@@ -13,7 +13,7 @@ export const checkBoundaries = (width: number): Function => (height: number): Fu
         velocity:       0,
         direction:      0,
         radius:         ball.radius,
-        backgroundColor:((ball.x > width - diameter )  || (ball.x < 0) || (ball.y > height - diameter ) || (ball.y < 0)) ? 'red' : ball.backgroundColor,
+        backgroundColor:((ball.x > width - diameter )  || (ball.x < 0) || (ball.y > height - diameter ) || (ball.y < 0)) ? 'red' : 'yellow',
         normalx:        ball.normalx,
         normaly:        ball.normaly,
         tangentx:       ball.tangentx,
@@ -22,6 +22,8 @@ export const checkBoundaries = (width: number): Function => (height: number): Fu
         dotProductNormal: ball.dotProductNormal,
         mass:           ball.mass,
         impulse:        ball.impulse,
+        hitPocket:      ball.hitPocket,
+        hitPocketNumber: ball.hitPocketNumber,
         index:          ball.index
     }
 }

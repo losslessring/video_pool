@@ -2,7 +2,7 @@ import { Ball } from '../types/types'
 
 export const checkBallsCollision = (balls: Ball[]) => (masterBall: Ball) => {
 
-    let collidedBall = {}
+    let collidedBall = {...masterBall}
 
     balls.forEach((checkBall: Ball) => {
         
@@ -56,6 +56,8 @@ export const checkBallsCollision = (balls: Ball[]) => (masterBall: Ball) => {
                 dotProductNormal: dotProductNormalMasterBall,
                 mass: masterBall.mass,
                 impulse: impulseMasterBall,
+                hitPocket: masterBall.hitPocket,
+                hitPocketNumber: masterBall.hitPocketNumber,
                 index: masterBall.index,
 
 

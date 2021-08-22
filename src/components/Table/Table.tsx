@@ -100,7 +100,11 @@ const Table = (props: any) => {
 
             
             >
-                {balls.map((ball) => (
+                {balls.map((ball) => {
+                    // console.log(balls)
+
+                    return (
+                        
                         <>
                         <BallComponent key={ball.index} index={ball.index} x={ball.x} y={ball.y} radius={props.radius} backgroundColor={ball.backgroundColor}/>
                         <Line width={props.width} height={props.height} lineBeginX={ball.x + ball.radius} lineBeginY={ball.y + ball.radius} lineEndX={ball.x + ball.radius + ball.normalx * 20} lineEndY={ball.y + ball.radius + ball.normaly * 20} color={'green'}/>
@@ -109,7 +113,7 @@ const Table = (props: any) => {
                         {/* <Line width={props.width} height={props.height} lineBeginX={ball.x + ball.radius} lineBeginY={ball.y + ball.radius} lineEndX={ball.x + ball.radius + ball.tangentx * 20} lineEndY={ball.y + ball.radius + ball.tangenty * 20} color={'red'}/> */}
                         {/* <Line width={props.width} height={props.height} lineBeginX={ball.x + ball.radius} lineBeginY={ball.y + ball.radius} lineEndX={ball.x + ball.radius + ball.dotProductTangent * 20} lineEndY={ball.y + ball.radius + ball.dotProductTangent * 10} color={'orange'}/> */}
                         </>
-                ))}
+                )})}
                 {pockets.map((pocket) => ( 
                     <PocketComponent x={pocket.x - pocket.radius} y={pocket.y - pocket.radius} radius={pocket.radius} backgroundColor={pocket.backgroundColor} index={pocket.index}/>
                 ))}
