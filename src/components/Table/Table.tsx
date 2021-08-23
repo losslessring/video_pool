@@ -36,7 +36,7 @@ const Table = (props: any) => {
 
     const [selectedBallIndex, setSelectedBallIndex]: any = useState(() => undefined) 
     const [clicksCounter, setClicksCounter] = useState(() => 0)  
-    const [count, setCount] = useState(() => 0)  
+    const [steps, setSteps] = useState(() => 0)  
     const [delay, setDelay] = useState(() => 100)
     const [isPlaying, setPlaying] = useState(() => true)
 
@@ -44,7 +44,7 @@ const Table = (props: any) => {
     useInterval(
         () => {
                 // Your custom logic here
-                setCount(prevCount => prevCount + 1)
+                setSteps(prevCount => prevCount + 1)
                 setBallsPosition(prevBallsPosition => nextBallsPosition(prevBallsPosition, pockets, props.width, props.height, props.radius))
                 
         },
@@ -118,7 +118,7 @@ const Table = (props: any) => {
                     <PocketComponent x={pocket.x - pocket.radius} y={pocket.y - pocket.radius} radius={pocket.radius} backgroundColor={pocket.backgroundColor} index={pocket.index}/>
                 ))}
             </div>
-            <h3 className="Counter">Steps {count}</h3>
+            <h3 className="Counter">Steps {steps}</h3>
             <button className="Button" onClick={() => setPlaying(!isPlaying)}>
                 {isPlaying ? 'pause' : 'play'}
             </button>
