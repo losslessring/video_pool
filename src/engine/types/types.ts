@@ -20,6 +20,7 @@ export type Ball = {
     impulse: number,
     hitPocket: boolean,
     hitPocketNumber: number | undefined,
+    hitStep: number,
     index: number
 
 }

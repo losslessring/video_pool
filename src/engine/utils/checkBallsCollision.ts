@@ -3,7 +3,7 @@ import { Ball } from '../types/types'
 export const checkBallsCollision = (balls: Ball[]) => (masterBall: Ball) => {
 
     let collidedBall = {...masterBall}
-
+    
     balls.forEach((checkBall: Ball) => {
         
         if(masterBall.index === checkBall.index) {
@@ -15,13 +15,14 @@ export const checkBallsCollision = (balls: Ball[]) => (masterBall: Ball) => {
         const overlap = (distance - masterBall.radius - checkBall.radius) / 2
         //console.log(`distance: ${distance}`)
         //console.log(shiftx)
-        
+        // const slowdownX = -masterBall.xspeed * 0.99
+        // const slowdownY = -masterBall.yspeed * 0.99
         const slowdownX = -masterBall.xspeed * 0.025
         const slowdownY = -masterBall.yspeed * 0.025
         // const slowdownX = 0.96
         // const slowdownY = 0.96
         // console.log(`xspeed: ${masterBall.xspeed} yspeed: ${masterBall.yspeed}`)
-
+        // console.log(masterBall.hitStep)
         if (distance < masterBall.radius + checkBall.radius) {
             const shiftX = masterBall.x - (overlap * ( masterBall.x - checkBall.x )) / distance 
             const shiftY = masterBall.y - (overlap * ( masterBall.y - checkBall.y )) / distance 
@@ -35,8 +36,12 @@ export const checkBallsCollision = (balls: Ball[]) => (masterBall: Ball) => {
 
 
             const dotProductTangentMasterBall = masterBall.xspeed * tangentX + masterBall.yspeed * tangentY
-
-            console.log(`dotProductTangentMasterBall: ${dotProductTangentMasterBall}`)
+            // console.log(`masterBall.index: ${masterBall.index}`)
+            // console.log(`checkBall.index: ${checkBall.index}`)
+            
+            console.log(masterBall)
+            console.log(checkBall)
+            // console.log(`dotProductTangentMasterBall: ${dotProductTangentMasterBall}`)
 
             const dotProductNormalMasterBall = masterBall.xspeed * normalX + masterBall.yspeed * normalY
             const dotProductNormalCheckBall = checkBall.xspeed * normalX + checkBall.yspeed * normalY
@@ -65,6 +70,7 @@ export const checkBallsCollision = (balls: Ball[]) => (masterBall: Ball) => {
                 impulse: impulseMasterBall,
                 hitPocket: masterBall.hitPocket,
                 hitPocketNumber: masterBall.hitPocketNumber,
+                hitStep: 0,
                 index: masterBall.index,
 
 
@@ -72,8 +78,8 @@ export const checkBallsCollision = (balls: Ball[]) => (masterBall: Ball) => {
         } else {
             collidedBall = {
                 ...masterBall,
-                xspeed: masterBall.xspeed + slowdownX,
-                yspeed: masterBall.yspeed + slowdownY,
+                xspeed: masterBall.xspeed + slowdownX, //* (currentStep - masterBall.hitStep) / 100,
+                yspeed: masterBall.yspeed + slowdownY, //* (currentStep - masterBall.hitStep) / 100,
                 backgroundColor: 'yellow',
                 normalx: 0,
                 normaly: 0,

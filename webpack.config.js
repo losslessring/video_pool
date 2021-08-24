@@ -28,7 +28,7 @@ module.exports = {
       },
     ],
   },
-
+  // devtool: "source-map",
   // Telling webpack which extensions
   // we are interested in.
   resolve: {

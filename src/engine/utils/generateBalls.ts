@@ -3,10 +3,10 @@ import { Ball } from '../types/types'
 
 
 
-export function generateBalls(amount :number, radius: number, ballsLayout = ballsLayoutClassic) :Ball[] {
+export function generateBalls(amount :number, radius: number, table: any, ballsLayout = ballsLayoutClassic) :Ball[] {
     const balls = [...Array(amount)]
             .map((_, i) => {
-                    const ballPosition = ballsLayout.find(currentBall => currentBall.index === i)   
+                    const ballPosition = ballsLayout(table, radius).find(currentBall => currentBall.index === i)   
                     
                     if (ballPosition){ 
                         return {
@@ -28,10 +28,11 @@ export function generateBalls(amount :number, radius: number, ballsLayout = ball
                                         tangenty:       0,
                                         dotProductTangent: 0,
                                         dotProductNormal: 0,
-                                        mass: 10,
-                                        impulse: 0,
+                                        mass:           10,
+                                        impulse:        0,
                                         hitPocket: false, 
                                         hitPocketNumber: undefined,
+                                        hitStep:        0,
                                         index:          i
                                 }
                     } else return {
@@ -55,6 +56,7 @@ export function generateBalls(amount :number, radius: number, ballsLayout = ball
                         impulse:        0,
                         hitPocket:      false, 
                         hitPocketNumber: undefined,
+                        hitStep:        0,
                         index:          i
                     }
              })

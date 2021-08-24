@@ -28,7 +28,7 @@ const Table = (props: any) => {
     }))
 
     const [balls, setBallsPosition] = useState(() => {
-        return generateBalls(2, props.radius)
+        return generateBalls(4, props.radius, {width: props.width, height: props.height})
     })
     const [pockets, setPockets] = useState(() => {
         return generatePockets({width: props.width, height: props.height})
@@ -37,7 +37,7 @@ const Table = (props: any) => {
     const [selectedBallIndex, setSelectedBallIndex]: any = useState(() => undefined) 
     const [clicksCounter, setClicksCounter] = useState(() => 0)  
     const [steps, setSteps] = useState(() => 0)  
-    const [delay, setDelay] = useState(() => 100)
+    const [delay, setDelay] = useState(() => 200)
     const [isPlaying, setPlaying] = useState(() => true)
 
     
