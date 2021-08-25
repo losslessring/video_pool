@@ -1,5 +1,5 @@
-import { Pocket, Ball } from '../types/types'
-import { distanceBetweenTwoCircles } from '../../engine/math/distanceBetweenTwoCircles'
+import { Pocket, Ball } from '../../types/types'
+import { distanceBetweenTwoCircles } from '../../math/distanceBetweenTwoCircles'
 
 export const checkPocketsHit = (pockets: Pocket[]) => (ball: Ball) => {
     

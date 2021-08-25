@@ -37,7 +37,7 @@ const Table = (props: any) => {
     const [selectedBallIndex, setSelectedBallIndex]: any = useState(() => undefined) 
     const [clicksCounter, setClicksCounter] = useState(() => 0)  
     const [steps, setSteps] = useState(() => 0)  
-    const [delay, setDelay] = useState(() => 200)
+    const [delay, setDelay] = useState(() => 10)
     const [isPlaying, setPlaying] = useState(() => true)
 
     

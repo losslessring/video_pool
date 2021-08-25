@@ -1,10 +1,11 @@
 import { Ball } from '../types/types'
 import { Pocket } from '../types/types'
 import { BallPosition } from '../types/types'
-import { checkBoundaries } from './checkBoundaries'
-import { checkBallsCollision } from './checkBallsCollision'
-import { checkPocketsHit } from './checkPocketsHit'
+import { checkBoundaries } from './ball_control/checkBoundaries'
+import { checkBallsCollision } from './ball_control/checkBallsCollision'
+import { checkPocketsHit } from './ball_control/checkPocketsHit'
 import { pipe } from './func/func'
+import { slowdownBall } from './ball_control/slowdownBall'
 
 export function nextBallsPosition(balls: Ball[], pockets: Pocket[], width: number, height: number, radius: number):Ball[] {
     
@@ -13,13 +14,15 @@ export function nextBallsPosition(balls: Ball[], pockets: Pocket[], width: numbe
         const nextBallPosition = pipe(
             checkBallsCollision(balls),
             checkPocketsHit(pockets),
-            checkBoundaries(width)(height)(radius)
+            checkBoundaries(width)(height)(radius),
+            slowdownBall
         )(ball)
-        // console.log(`${nextBallPosition.index} ${nextBallPosition.hitPocket}`)
+
+
         return nextBallPosition
     })
 
-    
+    // console.log(updatedBallsPositions)
     return updatedBallsPositions.filter(ball => !ball.hitPocket )
     
     

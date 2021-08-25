@@ -1,5 +1,5 @@
-import { Ball } from '../types/types'
-import { BallPosition } from '../types/types'
+import { Ball } from '../../types/types'
+import { BallPosition } from '../../types/types'
 
 export const checkBoundaries = (width: number): Function => (height: number): Function => (radius: number): Function => (ball: Ball): Ball => {
     const diameter = radius * 2
